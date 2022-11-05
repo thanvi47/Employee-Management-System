@@ -21,3 +21,4 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::view('a','admin.layouts.create');
+Route::resource('department',App\Http\Controllers\DepartmentController::class);
