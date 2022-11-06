@@ -9,18 +9,18 @@
                         {{session('message')}}
                     </div>
                 @endif
-                <form action="{{route('department.store')}}" method="post">
+                <form action="{{route('role.update',$role->id)}}" method="post">
              @csrf
+                    @method('PUT')
                     <div class="card">
-                    <div class="card-header">{{ __('Create Department') }}
-                    </div>
+                    <div class="card-header">{{ __('Edit Department') }}</div>
 
                     <div class="card-body">
 
                         <div class="form-group">
                             <lavel>Name</lavel>
 
-                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror">
+                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{$role->name}}">
                             @error('name')
                             <span class="invalid-feedback" role="alert">
                                         <strong>   <div class="alert alert-danger">
@@ -31,11 +31,11 @@
                         </div>
                         <div class="form-group">
                             <lavel>Description</lavel>
-                            <input type="text" name="description" class="form-control @error('description') is-invalid @enderror">
+                            <input type="text" name="description" class="form-control @error('description') is-invalid @enderror" value="{{$role->description}}">
                             @error('description')
                             <span class="invalid-feedback" role="alert">
                                         <strong>   <div class="alert alert-danger">
-                                   {{$message}}
+                        {{$message}}
                                  </div></strong>
                                     </span>
                             @enderror

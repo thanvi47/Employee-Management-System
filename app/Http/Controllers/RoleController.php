@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Department;
+use App\Models\Role;
 use Illuminate\Http\Request;
 
-class DepartmentController extends Controller
+class RoleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        $departments = Department::all();
-        return view('admin.department.index',compact('departments'));
+        $roles = Role::all();
+        return view('admin.role.index',compact('roles'));
     }
 
     /**
@@ -25,7 +25,7 @@ class DepartmentController extends Controller
      */
     public function create()
     {
-        return view('admin.department.create');
+        return view('admin.role.create');
     }
 
     /**
@@ -36,16 +36,15 @@ class DepartmentController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
-            'name'=>'required|unique:departments',
-//            'description'=>'required',
-        ]);
-    $department = new Department;
-    $department->name = $request->name;
-    $department->description = $request->description;
-    $department->save();
-    return redirect()->route('department.index')->with('message','Department Created Successfully');
-
+       $this->validate($request,[
+           'name'=>'required|unique:roles',
+//           'description'=>'required'
+       ]);
+         $role = new Role();
+            $role->name = $request->name;
+            $role->description = $request->description;
+            $role->save();
+            return redirect()->route('role.index')->with('massage','Role Created Successfully');
     }
 
     /**
@@ -67,8 +66,8 @@ class DepartmentController extends Controller
      */
     public function edit($id)
     {
-        $department = Department::find($id);
-        return view('admin.department.edit',compact('department'));
+        $role = Role::find($id);
+        return view('admin.role.edit',compact('role'));
     }
 
     /**
@@ -81,15 +80,12 @@ class DepartmentController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request,[
-            'name'=>'required|unique:departments,name,'.$id,
-//            'description'=>'required',
+            'name'=>'required|unique:roles,name,'.$id,
+//            'description'=>'required'
         ]);
-        $department = Department::find($id);
-        $department->name = $request->name;
-        $department->description = $request->description;
-        $department->save();
-        return redirect()->route('department.index')->with('message','Department Updated Successfully');
-
+        $role = Role::find($id);
+        $role->update($request->all());
+        return redirect()->route('role.index')->with('massage','Role Updated Successfully');
 
     }
 
@@ -101,9 +97,8 @@ class DepartmentController extends Controller
      */
     public function destroy($id)
     {
-        $department = Department::find($id);
-        $department->delete();
-        return redirect()->route('department.index')->with('massage','Department Deleted Successfully');
-
+     $role = Role::find($id);
+        $role->delete();
+        return redirect()->route('role.index')->with('massage','Role Deleted Successfully');
     }
 }

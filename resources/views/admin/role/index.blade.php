@@ -4,10 +4,10 @@
     <div class="container">
         <div class="row ">
             <div class="col-md-12">
-                @if(session('message'))
+                @if(session('massage'))
                     <div class="alert alert-success">
 
-                        {{session('message')}}
+                        {{session('massage')}}
                     </div>
                 @endif
               <nav aria-label="breadcrumb">
@@ -38,14 +38,14 @@
 {{--                        </tr>--}}
 {{--                        </tfoot>--}}
                         <tbody>
-                        @foreach($departments as $key=>$department)
+                        @foreach($roles as $key=>$role)
                             <tr>
                                 <td>{{$key+1}}</td>
-                                <td>{{$department->name}}</td>
-                                <td>{{$department->description}} </td>
-                                <td><a href="{{route('department.edit',$department->id)}} "  class="btn btn-outline-primary"> <i class="fas fa-edit">Edit</i></a></td>
+                                <td>{{$role->name}}</td>
+                                <td>{{$role->description}} </td>
+                                <td><a href="{{route('role.edit',$role->id)}} "  class="btn btn-outline-primary"> <i class="fas fa-edit">Edit</i></a></td>
                                 <td>
-                                    <form action="{{route('department.destroy',$department->id)}}" method="post">
+                                    <form action="{{route('role.destroy',$role->id)}}" method="post">
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-outline-danger"  type="submit"><i class="fas fa-trash"> Delete </i></button>

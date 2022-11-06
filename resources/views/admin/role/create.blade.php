@@ -9,10 +9,10 @@
                         {{session('message')}}
                     </div>
                 @endif
-                <form action="{{route('department.store')}}" method="post">
+                <form action="{{route('role.store')}}" method="post">
              @csrf
                     <div class="card">
-                    <div class="card-header">{{ __('Create Department') }}
+                    <div class="card-header">{{ __('Create Role') }}
                     </div>
 
                     <div class="card-body">
