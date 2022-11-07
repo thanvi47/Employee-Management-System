@@ -21,8 +21,19 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'address',
+        'mobile_number',
+        'department_id',
+        'designation',
+        'start_form',
+        'image'
     ];
-
+    public function department(){
+        return $this->hasOne(Department::class,'id','department_id');
+    }
+    public function role(){
+        return $this->hasOne(Role::class,'id','role_id');
+    }
     /**
      * The attributes that should be hidden for serialization.
      *
