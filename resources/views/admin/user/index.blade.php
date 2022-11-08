@@ -44,26 +44,26 @@
                         </td>
                         <td>{{$user->name}}</td>
                         <td>{{$user->email}}</td>
-                        <td>{{$user->department->name}}</td>
+                        <td>  {{$user->department->name ?? ''}} </td>
 
                         <td>{{$user->designation}}</td>
                         <td>{{$user->mobile_number}}</td>
                         <td>{{$user->address}}</td>
                         <td>{{$user->start_form}}</td>
-                        <td>{{$user->role->name}}</td>
+                        <td> <span  class="badge badge-success">{{$user->role->name ?? ''}}</span></td>
 {{--                        <td></span></td>--}}
                         <td>
-                        <a href="{{route('role.edit',$user->id)}} "  > <i class="fas fa-edit">Edit</i></a>
+                        <a href="{{route('user.edit',$user->id)}} "  > <i class="fas fa-edit">Edit</i></a>
                         </td>
 
                         <td>
-                            <a href="#" data-toggle="modal" data-target="#exampleModal">
+                            <a href="#" data-toggle="modal" data-target="#exampleModal{{$user->id}}">
                                 <i class="fas fa-trash text-danger">Delete</i>
                             </a>
                             <!-- Modal -->
-                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="exampleModal{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
-                                    <form action="#" method="post">@csrf
+                                    <form action="{{route('user.destroy',$user->id)}}" method="post">@csrf
                                         {{method_field('DELETE')}}
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -76,8 +76,8 @@
                                                 Do you want to delete?
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+                                                <button type="submit" class="btn btn-outline-danger">Delete</button>
                                             </div>
                                         </div>
                                     </form>

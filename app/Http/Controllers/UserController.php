@@ -46,7 +46,7 @@ class UserController extends Controller
             'email'=>'required|unique:users',
             'password'=>'required',
             'address'=>'required',
-            'mobile_number'=>'required',
+            'mobile_number'=>'required|unique:users',
             'department_id'=>'required',
             'role_id'=>'required',
             'designation'=>'required',
@@ -78,7 +78,7 @@ class UserController extends Controller
 
             $user->save();
 
-            return redirect()->back()->with('message','User Created Successfully');
+            return redirect()->route('user.index')->with('message','User Created Successfully');
 
 
 
@@ -104,7 +104,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+        return view('admin.user.edit',compact('user'));
     }
 
     /**
@@ -116,7 +117,53 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+
+        $this->validate($request,[
+
+            'name'=>'required',
+            'email'=>'required|unique:users,email,'.$id,
+//            'password'=>'required',
+            'address'=>'required',
+//            'mobile_number'=>'required|unique:users,mobile_number,'.$id,
+            'department_id'=>'required',
+            'role_id'=>'required',
+            'designation'=>'required',
+            'start_form'=>'required',
+            'image'=>'mimes:jpeg,jpg,png,gif'
+        ]);
+//        dd($request->all());
+
+
+        if ($request->hasFile('image')){
+
+            $image = time().$request->image->getClientOriginalName();
+            $request->image->move(public_path('profile'),$image);
+//             $data['image'] = $image_name;
+        }else{
+            $image=$user->image;
+
+        }
+        if ($request->password) {
+            $password = bcrypt($request->password);
+        }else{
+            $password = $user->password;
+        }
+        $user->name = $request->name;
+        $user->image = $image;
+        $user->password = $password;
+        $user->email = $request->email;
+        $user->address = $request->address;
+        $user->mobile_number = $request->mobile_number;
+        $user->department_id = $request->department_id;
+        $user->designation = $request->designation;
+        $user->start_form = $request->start_form;
+        $user->role_id = $request->role_id;
+        $user->save();
+        return redirect()->route('user.index')->with('message','User Updated Successfully');
+
+
+
     }
 
     /**
@@ -127,6 +174,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();
+
+        return redirect()->route('user.index')->with('message','User Deleted Successfully');
     }
 }

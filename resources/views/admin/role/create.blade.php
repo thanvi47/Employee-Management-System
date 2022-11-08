@@ -34,10 +34,12 @@
                             <input type="text" name="description" class="form-control @error('description') is-invalid @enderror">
                             @error('description')
                             <span class="invalid-feedback" role="alert">
-                                        <strong>   <div class="alert alert-danger">
+                                <strong>
+                                  <div class="alert alert-danger">
                                    {{$message}}
-                                 </div></strong>
-                                    </span>
+                                 </div>
+                                </strong>
+                            </span>
                             @enderror
                         </div>
                         <div class="form-group">
