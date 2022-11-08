@@ -25,6 +25,7 @@ Route::group(['middleware'=>'auth'],function(){
     Route::resource('department',App\Http\Controllers\DepartmentController::class);
     Route::resource('role',App\Http\Controllers\RoleController::class);
     Route::resource('user',App\Http\Controllers\UserController::class);
+    Route::resource('permission',App\Http\Controllers\PermissionController::class);
 });
 Auth::routes();
 
