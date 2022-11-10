@@ -53,10 +53,12 @@
                         <td> <span  class="badge badge-success">{{$user->role->name ?? ''}}</span></td>
 {{--                        <td></span></td>--}}
                         <td>
-                        <a href="{{route('user.edit',$user->id)}} "  > <i class="fas fa-edit">Edit</i></a>
+                            @if(isset(auth()->user()->role->permissions['name']['user']['can-edit']))
+                        <a href="{{route('user.edit',$user->id)}} "  > <i class="fas fa-edit">Edit</i></a>@endif
                         </td>
 
                         <td>
+                            @if(isset(auth()->user()->role->permissions['name']['user']['can-delete']))
                             <a href="#" data-toggle="modal" data-target="#exampleModal{{$user->id}}">
                                 <i class="fas fa-trash text-danger">Delete</i>
                             </a>
@@ -85,7 +87,7 @@
                             </div>
                             <!--Modal end-->
 
-
+                            @endif
                         </td>
 
 

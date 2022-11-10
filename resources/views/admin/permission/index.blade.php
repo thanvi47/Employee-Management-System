@@ -43,14 +43,17 @@
                             <td>{{$key+1}}</td>
                             <td>{{$permission->role->name}}</td>
 {{--                            <td>{{$department->description}} </td>--}}
-                            <td><a href="{{route('permission.edit',$permission->id)}} "  class="btn btn-outline-primary"> <i class="fas fa-edit">Edit</i></a></td>
                             <td>
+                                @if(isset(auth()->user()->role->permissions['name']['permission']['can-edit']))
+                                <a href="{{route('permission.edit',$permission->id)}} "  class="btn btn-outline-primary"> <i class="fas fa-edit">Edit</i></a>@endif</td>
+                            <td>
+                                @if(isset(auth()->user()->role->permissions['name']['permission']['can-delete']))
                                 <form action="{{route('permission.destroy',$permission->id)}}" method="post">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-outline-danger"  type="submit"><i class="fas fa-trash"> Delete </i></button>
                                 </form>
-
+                                @endif
                             </td>
                         </tr>
                     @endforeach

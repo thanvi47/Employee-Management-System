@@ -14,7 +14,6 @@
                  <ol class="breadcrumb-item active" aria-current="page">
                      All Departments
                  </ol>
-
               </nav>
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
@@ -23,7 +22,6 @@
                             <th>Name</th>
                             <th>Description</th>
                             <th>Edit</th>
-
                             <th>Delete</th>
                         </tr>
                         </thead>
@@ -43,14 +41,16 @@
                                 <td>{{$key+1}}</td>
                                 <td>{{$department->name}}</td>
                                 <td>{{$department->description}} </td>
-                                <td><a href="{{route('department.edit',$department->id)}} "  class="btn btn-outline-primary"> <i class="fas fa-edit">Edit</i></a></td>
-                                <td>
+                                <td>  @if(isset(auth()->user()->role->permissions['name']['department']['can-edit']))
+))
+                                <a href="{{route('department.edit',$department->id)}} "  class="btn btn-outline-primary"> <i class="fas fa-edit">Edit</i></a> @endif</td>
+                                <td>@if(isset(auth()->user()->role->permissions['name']['department']['can-delete']))
                                     <form action="{{route('department.destroy',$department->id)}}" method="post">
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-outline-danger"  type="submit"><i class="fas fa-trash"> Delete </i></button>
                                     </form>
-
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
