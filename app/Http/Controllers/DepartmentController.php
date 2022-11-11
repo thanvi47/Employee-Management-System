@@ -13,9 +13,11 @@ class DepartmentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   if(isset(auth()->user()->role->permissions['name']['department']['can-view'])){
         $departments = Department::all();
-        return view('admin.department.index',compact('departments'));
+        return view('admin.department.index',compact('departments'));}else{
+            return redirect()->back()->with('error','You are not authorized to access this page');
+        }
     }
 
     /**
@@ -25,7 +27,13 @@ class DepartmentController extends Controller
      */
     public function create()
     {
-        return view('admin.department.create');
+        if(isset(auth()->user()->role->permissions['name']['department']['can-add']))
+        {
+            return view('admin.department.create'); } else{
+
+            return redirect()->back()->with('error','You are not authorized to access this page');
+        }
+
     }
 
     /**
@@ -67,8 +75,11 @@ class DepartmentController extends Controller
      */
     public function edit($id)
     {
+        if(isset(auth()->user()->role->permissions['name']['department']['can-edit'])){
         $department = Department::find($id);
-        return view('admin.department.edit',compact('department'));
+        return view('admin.department.edit',compact('department'));}else{
+            return redirect()->back()->with('error','You are not authorized to access this page');
+        }
     }
 
     /**
@@ -101,9 +112,12 @@ class DepartmentController extends Controller
      */
     public function destroy($id)
     {
+        if(isset(auth()->user()->role->permissions['name']['department']['can-delete'])){
         $department = Department::find($id);
         $department->delete();
-        return redirect()->route('department.index')->with('massage','Department Deleted Successfully');
+        return redirect()->route('department.index')->with('massage','Department Deleted Successfully');}else{
+            return redirect()->back()->with('error','You are not authorized to access this page');
+        }
 
     }
 }

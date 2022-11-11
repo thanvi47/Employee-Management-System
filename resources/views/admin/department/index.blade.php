@@ -10,6 +10,12 @@
                         {{session('message')}}
                     </div>
                 @endif
+                    @if(session('error'))
+                    <div class="alert alert-warning">
+
+                        {{session('error')}}
+                    </div>
+                @endif
               <nav aria-label="breadcrumb">
                  <ol class="breadcrumb-item active" aria-current="page">
                      All Departments

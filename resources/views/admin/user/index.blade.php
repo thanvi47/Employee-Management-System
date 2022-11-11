@@ -15,6 +15,11 @@
                         {{Session::get('message')}}
                     </div>
                 @endif
+                @if(Session::has('error'))
+                    <div class="alert alert-warning">
+                        {{Session::get('error')}}
+                    </div>
+                @endif
 
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>

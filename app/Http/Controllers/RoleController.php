@@ -13,9 +13,12 @@ class RoleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   if(isset(auth()->user()->role->permissions['name']['role']['can-view'])){
         $roles = Role::all();
-        return view('admin.role.index',compact('roles'));
+        return view('admin.role.index',compact('roles'));}
+        else{
+            return redirect()->back()->with('error','You are not authorized to access this page');
+        }
     }
 
     /**
@@ -24,8 +27,11 @@ class RoleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        return view('admin.role.create');
+    {   if(isset(auth()->user()->role->permissions['name']['role']['can-add'])){
+        return view('admin.role.create');}
+        else{
+            return redirect()->back()->with('error','You are not authorized to access this page');
+        }
     }
 
     /**
@@ -65,9 +71,12 @@ class RoleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
+    {   if(isset(auth()->user()->role->permissions['name']['role']['can-edit'])){
         $role = Role::find($id);
-        return view('admin.role.edit',compact('role'));
+        return view('admin.role.edit',compact('role'));}
+        else{
+            return redirect()->back()->with('error','You are not authorized to access this page');
+        }
     }
 
     /**
@@ -96,9 +105,12 @@ class RoleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
+    {   if(isset(auth()->user()->role->permissions['name']['role']['can-delete'])){
      $role = Role::find($id);
         $role->delete();
-        return redirect()->route('role.index')->with('massage','Role Deleted Successfully');
+        return redirect()->route('role.index')->with('massage','Role Deleted Successfully');}
+        else{
+            return redirect()->back()->with('error','You are not authorized to access this page');
+        }
     }
 }

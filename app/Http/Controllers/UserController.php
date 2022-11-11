@@ -15,9 +15,12 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   if(isset(auth()->user()->role->permissions['name']['user']['can-view'])){
         $users = User::all();
-        return view('admin.user.index',compact('users'));
+        return view('admin.user.index',compact('users'));}
+        else{
+            return redirect()->back()->with('error','You are not authorized to access this page');
+        }
     }
 
     /**
@@ -26,10 +29,13 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
+    {   if(isset(auth()->user()->role->permissions['name']['user']['can-add'])){
         $departments = Department::all();
         $roles = Role::all();
-        return view('admin.user.create',compact('departments','roles'));
+        return view('admin.user.create',compact('departments','roles'));}
+        else{
+            return redirect()->back()->with('error','You are not authorized to access this page');
+        }
     }
 
     /**
@@ -103,9 +109,12 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
+    {   if(isset(auth()->user()->role->permissions['name']['user']['can-edit'])){
         $user = User::find($id);
-        return view('admin.user.edit',compact('user'));
+        return view('admin.user.edit',compact('user'));}
+        else{
+            return redirect()->back()->with('error','You are not authorized to access this page');
+        }
     }
 
     /**
@@ -173,10 +182,15 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
+    {   if(isset(auth()->user()->role->permissions['name']['user']['can-delete'])){
         $user = User::find($id);
-        $user->delete();
+        if (auth()->user()->id == $user->id){
+            return redirect()->back()->with('error','You are not authorized to delete yourself');
+        }else{  $user->delete();}
 
-        return redirect()->route('user.index')->with('message','User Deleted Successfully');
+        return redirect()->route('user.index')->with('message','User Deleted Successfully');}
+        else{
+            return redirect()->back()->with('error','You are not authorized to access this page');
+        }
     }
 }

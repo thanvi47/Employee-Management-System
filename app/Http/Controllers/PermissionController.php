@@ -13,9 +13,11 @@ class PermissionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   if(isset(auth()->user()->role->permissions['name']['permission']['can-view'])){
         $permissions = Permission::all();
-        return view('admin.permission.index',compact('permissions'));
+        return view('admin.permission.index',compact('permissions'));}else{
+            return redirect()->back()->with('error','You are not authorized to access this page');
+        }
     }
 
     /**
@@ -24,8 +26,10 @@ class PermissionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        return view('admin.permission.create');
+    {   if(isset(auth()->user()->role->permissions['name']['permission']['can-add'])){
+        return view('admin.permission.create');}else{
+            return redirect()->back()->with('error','You are not authorized to access this page');
+        }
     }
 
     /**
@@ -62,9 +66,11 @@ class PermissionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
+    {       if(isset(auth()->user()->role->permissions['name']['permission']['can-edit'])){
         $permission = Permission::find($id);
-        return view('admin.permission.edit',compact('permission'));
+        return view('admin.permission.edit',compact('permission'));}else{
+            return redirect()->back()->with('error','You are not authorized to access this page');
+        }
 
     }
 
@@ -93,9 +99,11 @@ class PermissionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
+    {   if(isset(auth()->user()->role->permissions['name']['permission']['can-delete'])){
         $permission = Permission::find($id);
         $permission->delete();
-        return redirect()->route('permission.index')->with('message','Permission deleted successfully');
+        return redirect()->route('permission.index')->with('message','Permission deleted successfully');}else{
+            return redirect()->back()->with('error','You are not authorized to access this page');
+        }
     }
 }
