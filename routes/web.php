@@ -26,6 +26,7 @@ Route::group(['middleware'=>['auth','has.permission']],function(){
     Route::resource('role',App\Http\Controllers\RoleController::class);
     Route::resource('user',App\Http\Controllers\UserController::class);
     Route::resource('permission',App\Http\Controllers\PermissionController::class);
+    Route::resource('leave',App\Http\Controllers\LeaveController::class);
 });
 Auth::routes();
 
