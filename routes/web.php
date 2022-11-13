@@ -27,6 +27,7 @@ Route::group(['middleware'=>['auth','has.permission']],function(){
     Route::resource('user',App\Http\Controllers\UserController::class);
     Route::resource('permission',App\Http\Controllers\PermissionController::class);
     Route::resource('leave',App\Http\Controllers\LeaveController::class);
+    Route::post('accept-reject-leave/{id}',[App\Http\Controllers\LeaveController::class,'acceptReject'])->name('accept.reject');
 });
 Auth::routes();
 

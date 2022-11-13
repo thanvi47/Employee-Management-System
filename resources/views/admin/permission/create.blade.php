@@ -88,7 +88,7 @@
                                     <td><input type="checkbox" name="name[notice][can-list]" value="1"></td>
                                 </tr>
                                 <tr>
-                                    <td>Approve Leave</td>
+                                    <td> Mail</td>
                                     <td><input type="checkbox" name="name[mail][can-add]" value="1"></td>
                                     <td></td>
                                     <td></td>
@@ -96,7 +96,7 @@
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td>Mail </td>
+                                    <td>Approve Leave </td>
                                     <td></td>
                                     <td></td>
                                     <td></td>

@@ -13,8 +13,13 @@ class LeaveController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
+    {    if(isset(auth()->user()->role->permissions['name']['leave']['can-list'])){
+        $leaves = Leave::latest()->get();
+        return view('admin.leave.index',compact('leaves'));}
+        else{
+            return redirect()->back()->with('error','You are not authorized to access this page');
+        }
+
     }
 
     /**
@@ -115,5 +120,17 @@ class LeaveController extends Controller
     {
       Leave::find($id)->delete();
         return redirect()->back()->with('message', 'Leave Deleted Successfully');
+    }
+    public function acceptReject(Request $request,$id)
+    {
+//        $status = $request->status;
+//        $message = $request->message;
+        $leave = Leave::find($id);
+
+
+        $leave->status = $request->status;
+        $leave->message = $request->message;
+        $leave->save();
+        return redirect()->back()->with('message','Status change successfully.');
     }
 }

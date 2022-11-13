@@ -158,17 +158,18 @@
 {{--        </li>--}}
 
         <!-- Nav Item - Charts -->
+        @if(isset(auth()->user()->role->permissions['name']['leave']['can-list']))
         <li class="nav-item">
-            <a class="nav-link" href="charts.html">
+            <a class="nav-link" href="{{route('leave.index')}}">
                 <i class="fas fa-fw fa-chart-area"></i>
-                <span>Charts</span></a>
+                <span>Staff Leave Request</span></a>
         </li>
-
+        @endif
         <!-- Nav Item - Tables -->
         <li class="nav-item">
-            <a class="nav-link" href="tables.html">
+            <a class="nav-link" href="{{route('leave.create')}}">
                 <i class="fas fa-fw fa-table"></i>
-                <span>Tables</span></a>
+                <span>Create Leave</span></a>
         </li>
 
         <!-- Divider -->
