@@ -107,7 +107,7 @@
             <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                aria-expanded="true" aria-controls="collapseUtilities">
-                <i class="fas fa-fw fa-wrench"></i>
+                <i class="fas fa-fw fa-users"></i>
 
                 <span>Employees</span>
             </a>
@@ -168,9 +168,23 @@
         <!-- Nav Item - Tables -->
         <li class="nav-item">
             <a class="nav-link" href="{{route('leave.create')}}">
-                <i class="fas fa-fw fa-table"></i>
+                <i class="fas fa-fw fa-pencil-alt"></i>
                 <span>Create Leave</span></a>
         </li>
+
+
+        <li class="nav-item">
+            <a class="nav-link" href="{{route('notice.index')}}">
+                <i class="fas fa-fw fa-table"></i>
+                <span>All Notice</span></a>
+        </li>
+        @if(isset(auth()->user()->role->permissions['name']['notice']['can-add']))
+        <li class="nav-item">
+            <a class="nav-link" href="{{route('notice.create')}}">
+                <i class="fas fa-fw fa-pen"></i>
+                <span>Create Notice</span></a>
+        </li>
+        @endif
 
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
