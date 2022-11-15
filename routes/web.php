@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MailController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,7 +29,10 @@ Route::group(['middleware'=>['auth','has.permission']],function(){
     Route::resource('permission',App\Http\Controllers\PermissionController::class);
     Route::resource('leave',App\Http\Controllers\LeaveController::class);
     Route::resource('notice',App\Http\Controllers\NoticeController::class);
+    Route::resource('mail',App\Http\Controllers\MailController::class);
     Route::post('accept-reject-leave/{id}',[App\Http\Controllers\LeaveController::class,'acceptReject'])->name('accept.reject');
+//    Route::get('/mail',[App\Http\Controllers\MailController::class,'create']);
+
 });
 Auth::routes();
 
