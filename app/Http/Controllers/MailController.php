@@ -25,7 +25,11 @@ class MailController extends Controller
      */
     public function create()
     {
-        return view('admin.mail.create');
+        if(isset(auth()->user()->role->permissions['name']['mail']['can-add'])) {
+            return view('admin.mail.create');
+        }else{
+            return redirect()->back()->with('error','You are not authorized to access this page');
+        }
 
     }
 

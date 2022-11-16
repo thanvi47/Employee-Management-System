@@ -185,6 +185,13 @@
                 <span>Create Notice</span></a>
         </li>
         @endif
+        @if(isset(auth()->user()->role->permissions['name']['mail']['can-add']))
+        <li class="nav-item">
+            <a class="nav-link" href="{{route('mail.create')}}">
+                <i class="fas fa-fw fa-envelope"></i>
+                <span>Mail </span></a>
+        </li>
+        @endif
 
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
