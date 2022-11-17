@@ -17,8 +17,8 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                Earnings (Monthly)</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                              <i class="fa fa-users" ></i>  User</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{\App\Models\User::all()->count()}}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -34,9 +34,10 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                Earnings (Annual)</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1"><i class="fas fa-home">
+
+                                </i>  Department</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{\App\Models\Department::all()->count()}}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -52,11 +53,13 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">  <i class="fas fa-envelope"></i>  Notice
                             </div>
                             <div class="row no-gutters align-items-center">
                                 <div class="col-auto">
-                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+
+                                        {{\App\Models\Notice::all()->count()}}</div>
                                 </div>
                                 <div class="col">
                                     <div class="progress progress-sm mr-2">
@@ -81,9 +84,9 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                Pending Requests</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">  <i class="fas fa-book-dead "></i>
+                                Pending Leave</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{\App\Models\Leave::all()->count()}}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -93,6 +96,52 @@
             </div>
         </div>
     </div>
+
+    <div class="row">
+
+        <!-- Area Chart -->
+        <div class="col-xl-12 col-lg-7">
+            <div class="card shadow mb-4">
+                <div class="card-header">
+                    Your Details
+                </div>
+                <br>
+                <div class="card-header bg-gradient-dark">
+                    <b> Name : {{Auth::user()->name}}</b>
+                </div>
+                <br>
+                <div class="card-header bg-gradient-light">
+                    <b> Email : {{Auth::user()->email}}</b>
+                </div>
+                <br>
+                <div class="card-header bg-gradient-dark">
+                    <b> Mobile Number : {{Auth::user()->mobile_number}}</b>
+                </div>
+                <div class="card-header bg-gradient-light">
+                    <b> Department : {{Auth::user()->department->name}}</b>
+                </div>
+                <div class="card-header bg-gradient-dark">
+                    <b> Designation : {{Auth::user()->designation}}</b>
+                </div>
+                <div class="card-header bg-gradient-light">
+                    <b> Designation : {{Auth::user()->role->name}}</b>
+                </div>
+{{--                <div class="card-header bg-gradient-dark">--}}
+{{--                    <b> Designation : {{Auth::user()->designation}}</b>--}}
+{{--                </div>--}}
+
+
+
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
 
     <!-- Content Row -->
 

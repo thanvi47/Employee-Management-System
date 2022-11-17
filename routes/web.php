@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 Route::group(['middleware'=>['auth','has.permission']],function(){
     Route::get('/', function () {
-        return view('admin.layouts.master');
+        return view('admin.layouts.dashboard');
     });
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::view('a','admin.layouts.create');
